@@ -3,8 +3,10 @@ import random
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 NUMS = "0123456789"
 SYMBOLS = "!@#$%^&*()?+-_="
+GENERATE_PASSWORD = "1"
+VALIDATE_PASSWORD = "2"
 
-def generate_password(charset, length):
+def get_password(charset, length):
     password = ""
     for char in range(length):
         password += charset[random.randrange(len(charset))]
@@ -33,15 +35,31 @@ def generate_charset(letters, numbers, symbols):
             print("Please enter a valid number")
     return chars
 
-print("Please select character types: \n1: Uppercase and lowercase letters\n2: Letters and numbers\n3: Letters and symbols\n4: Letters and numbers and symbols")
+def generate_password():
+    print("Please select character types: \n1: Uppercase and lowercase letters\n2: Letters and numbers\n3: Letters and symbols\n4: Letters and numbers and symbols")
 
-charset = generate_charset(LETTERS, NUMS, SYMBOLS)
+    charset = generate_charset(LETTERS, NUMS, SYMBOLS)
+    while True:
+        length = input("Enter password length: ")
+        if length.isdigit():
+            length = int(length)
+            break
+        else:
+            print("Please enter a number")
+
+    print(f"Your password is: {get_password(charset, length)}")
+
+def validate_password():
+    print("Feature not yet implemented")
+
+print("Please select: \n1: Generate password \n2: Validate Password")
 while True:
-    length = input("Enter password length: ")
-    if length.isdigit():
-        length = int(length)
+    choice = input()
+    if choice == GENERATE_PASSWORD:
+        generate_password()
+        break
+    elif choice == VALIDATE_PASSWORD:
+        validate_password()
         break
     else:
-        print("Please enter a number")
-
-print(f"Your password is: {generate_password(charset, length)}")
+        print("Invalid choice")
