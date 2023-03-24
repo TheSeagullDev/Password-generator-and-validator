@@ -44,4 +44,4 @@ while True:
     else:
         print("Please enter a number")
 
-print(generate_password(charset, length))
+print(f"Your password is: {generate_password(charset, length)}")
